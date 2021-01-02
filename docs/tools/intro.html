@@ -1,0 +1,1969 @@
+
+<!DOCTYPE HTML>
+<html lang="ru" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Инструменты · TypeScript Deep Dive</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Basarat Ali Syed">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="prettier.html" />
+    
+    
+    <link rel="prev" href="../testing/cypress.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Введите условия поиска" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../getting-started.html">
+            
+                <a href="../getting-started.html">
+            
+                    
+                    Вступление
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../why-typescript.html">
+            
+                <a href="../why-typescript.html">
+            
+                    
+                    Почему TypeScript
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../javascript/recap.html">
+            
+                <a href="../javascript/recap.html">
+            
+                    
+                    JavaScript
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../javascript/equality.html">
+            
+                <a href="../javascript/equality.html">
+            
+                    
+                    Сравнение типов данных
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../javascript/references.html">
+            
+                <a href="../javascript/references.html">
+            
+                    
+                    Ссылочные типы данных
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../javascript/null-undefined.html">
+            
+                <a href="../javascript/null-undefined.html">
+            
+                    
+                    Null vs. Undefined
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../javascript/this.html">
+            
+                <a href="../javascript/this.html">
+            
+                    
+                    this
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../javascript/closure.html">
+            
+                <a href="../javascript/closure.html">
+            
+                    
+                    Замыкания
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../javascript/number.html">
+            
+                <a href="../javascript/number.html">
+            
+                    
+                    Числа
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../javascript/truthy.html">
+            
+                <a href="../javascript/truthy.html">
+            
+                    
+                    Truthy
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../future-javascript.html">
+            
+                <a href="../future-javascript.html">
+            
+                    
+                    Будущее JavaScript
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../classes.html">
+            
+                <a href="../classes.html">
+            
+                    
+                    Классы
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../classes-emit.html">
+            
+                <a href="../classes-emit.html">
+            
+                    
+                    Объявление классов
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../arrow-functions.html">
+            
+                <a href="../arrow-functions.html">
+            
+                    
+                    Стрелочные функции
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../rest-parameters.html">
+            
+                <a href="../rest-parameters.html">
+            
+                    
+                    Rest параметры
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../let.html">
+            
+                <a href="../let.html">
+            
+                    
+                    Директива let
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../const.html">
+            
+                <a href="../const.html">
+            
+                    
+                    Директива const
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../destructuring.html">
+            
+                <a href="../destructuring.html">
+            
+                    
+                    Деструктурирование
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../spread-operator.html">
+            
+                <a href="../spread-operator.html">
+            
+                    
+                    Spread Оператор
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../for...of.html">
+            
+                <a href="../for...of.html">
+            
+                    
+                    for...of
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="../iterators.html">
+            
+                <a href="../iterators.html">
+            
+                    
+                    Итераторы
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="../template-strings.html">
+            
+                <a href="../template-strings.html">
+            
+                    
+                    Шаблонизаторы строк
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.11" data-path="../promise.html">
+            
+                <a href="../promise.html">
+            
+                    
+                    Promise
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.12" data-path="../generators.html">
+            
+                <a href="../generators.html">
+            
+                    
+                    Генераторы
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.13" data-path="../async-await.html">
+            
+                <a href="../async-await.html">
+            
+                    
+                    Async Await
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../project/project.html">
+            
+                <a href="../project/project.html">
+            
+                    
+                    Проекты
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../project/compilation-context.html">
+            
+                <a href="../project/compilation-context.html">
+            
+                    
+                    Контекст компиляции
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../project/tsconfig.html">
+            
+                <a href="../project/tsconfig.html">
+            
+                    
+                    tsconfig.json
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.2" data-path="../project/files.html">
+            
+                <a href="../project/files.html">
+            
+                    
+                    Какие файлы?
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../project/declarationspaces.html">
+            
+                <a href="../project/declarationspaces.html">
+            
+                    
+                    Область описания
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../project/modules.html">
+            
+                <a href="../project/modules.html">
+            
+                    
+                    Модули
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1" data-path="../project/external-modules.html">
+            
+                <a href="../project/external-modules.html">
+            
+                    
+                    Анотация модулей
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.2" data-path="../project/globals.html">
+            
+                <a href="../project/globals.html">
+            
+                    
+                    globals.d.ts
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../project/namespaces.html">
+            
+                <a href="../project/namespaces.html">
+            
+                    
+                    Пространство имен
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../project/dynamic-import-expressions.html">
+            
+                <a href="../project/dynamic-import-expressions.html">
+            
+                    
+                    Динамический import
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../quick/nodejs.html">
+            
+                <a href="../quick/nodejs.html">
+            
+                    
+                    Node.js Быстрый старт
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../quick/browser.html">
+            
+                <a href="../quick/browser.html">
+            
+                    
+                    Browser Быстрый старт
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../types/type-system.html">
+            
+                <a href="../types/type-system.html">
+            
+                    
+                    Система типов в TypeScript
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../types/migrating.html">
+            
+                <a href="../types/migrating.html">
+            
+                    
+                    Руководство по миграции с JS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../types/@types.html">
+            
+                <a href="../types/@types.html">
+            
+                    
+                    @types
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../types/ambient/intro.html">
+            
+                <a href="../types/ambient/intro.html">
+            
+                    
+                    Декларирование среды
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.3.1" data-path="../types/ambient/d.ts.html">
+            
+                <a href="../types/ambient/d.ts.html">
+            
+                    
+                    Декларирование файлов
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3.2" data-path="../types/ambient/variables.html">
+            
+                <a href="../types/ambient/variables.html">
+            
+                    
+                    Переменные
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../types/interfaces.html">
+            
+                <a href="../types/interfaces.html">
+            
+                    
+                    Интерфейсы
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="../enums.html">
+            
+                <a href="../enums.html">
+            
+                    
+                    Перечисляемые типы
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.6" data-path="../types/lib.d.ts.html">
+            
+                <a href="../types/lib.d.ts.html">
+            
+                    
+                    lib.d.ts
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.7" data-path="../types/functions.html">
+            
+                <a href="../types/functions.html">
+            
+                    
+                    Функции
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.8" data-path="../types/callable.html">
+            
+                <a href="../types/callable.html">
+            
+                    
+                    Callable
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.9" data-path="../types/type-assertion.html">
+            
+                <a href="../types/type-assertion.html">
+            
+                    
+                    Объявление типов
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.10" data-path="../types/freshness.html">
+            
+                <a href="../types/freshness.html">
+            
+                    
+                    Freshness
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.11" data-path="../types/typeGuard.html">
+            
+                <a href="../types/typeGuard.html">
+            
+                    
+                    Type Guard
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.12" data-path="../types/literal-types.html">
+            
+                <a href="../types/literal-types.html">
+            
+                    
+                    Литералы
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.13" data-path="../types/readonly.html">
+            
+                <a href="../types/readonly.html">
+            
+                    
+                    Readonly
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.14" data-path="../types/generics.html">
+            
+                <a href="../types/generics.html">
+            
+                    
+                    Generics
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.15" data-path="../types/type-inference.html">
+            
+                <a href="../types/type-inference.html">
+            
+                    
+                    Тип Inference
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.16" data-path="../types/type-compatibility.html">
+            
+                <a href="../types/type-compatibility.html">
+            
+                    
+                    Тип Compatibility
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.17" data-path="../types/never.html">
+            
+                <a href="../types/never.html">
+            
+                    
+                    Тип Never
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.18" data-path="../types/discriminated-unions.html">
+            
+                <a href="../types/discriminated-unions.html">
+            
+                    
+                    Discriminated Unions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.19" data-path="../types/index-signatures.html">
+            
+                <a href="../types/index-signatures.html">
+            
+                    
+                    Index Signatures
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.20" data-path="../types/moving-types.html">
+            
+                <a href="../types/moving-types.html">
+            
+                    
+                    Перемещаемые типы
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.21" data-path="../types/exceptions.html">
+            
+                <a href="../types/exceptions.html">
+            
+                    
+                    Обработка исключений
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.22" data-path="../types/mixins.html">
+            
+                <a href="../types/mixins.html">
+            
+                    
+                    Примиси
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../jsx/tsx.html">
+            
+                <a href="../jsx/tsx.html">
+            
+                    
+                    JSX
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../jsx/react.html">
+            
+                <a href="../jsx/react.html">
+            
+                    
+                    React
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../jsx/others.html">
+            
+                <a href="../jsx/others.html">
+            
+                    
+                    Non React JSX
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../options/intro.html">
+            
+                <a href="../options/intro.html">
+            
+                    
+                    Options
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../options/noImplicitAny.html">
+            
+                <a href="../options/noImplicitAny.html">
+            
+                    
+                    noImplicitAny
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../options/strictNullChecks.html">
+            
+                <a href="../options/strictNullChecks.html">
+            
+                    
+                    strictNullChecks
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../errors/main.html">
+            
+                <a href="../errors/main.html">
+            
+                    
+                    Ошибки в TypeScript
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../errors/interpreting-errors.html">
+            
+                <a href="../errors/interpreting-errors.html">
+            
+                    
+                    Ошибки интерпретации
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="../errors/common-errors.html">
+            
+                <a href="../errors/common-errors.html">
+            
+                    
+                    Распространенные ошибки
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../npm/">
+            
+                <a href="../npm/">
+            
+                    
+                    NPM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="../testing/intro.html">
+            
+                <a href="../testing/intro.html">
+            
+                    
+                    Тестирование
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.13.1" data-path="../testing/jest.html">
+            
+                <a href="../testing/jest.html">
+            
+                    
+                    Jest
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2" data-path="../testing/cypress.html">
+            
+                <a href="../testing/cypress.html">
+            
+                    
+                    Cypress
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.14" data-path="intro.html">
+            
+                <a href="intro.html">
+            
+                    
+                    Инструменты
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.14.1" data-path="prettier.html">
+            
+                <a href="prettier.html">
+            
+                    
+                    Prettier
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.2" data-path="husky.html">
+            
+                <a href="husky.html">
+            
+                    
+                    Husky
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.3" data-path="eslint.html">
+            
+                <a href="eslint.html">
+            
+                    
+                    ESLint
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.4" data-path="changelog.html">
+            
+                <a href="changelog.html">
+            
+                    
+                    Changelog
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="../tips/main.html">
+            
+                <a href="../tips/main.html">
+            
+                    
+                    Советы
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.15.1" data-path="../tips/stringEnums.html">
+            
+                <a href="../tips/stringEnums.html">
+            
+                    
+                    Строковые перечисляемые типы
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.2" data-path="../tips/nominalTyping.html">
+            
+                <a href="../tips/nominalTyping.html">
+            
+                    
+                    Базовая типизация
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.3" data-path="../tips/statefulFunctions.html">
+            
+                <a href="../tips/statefulFunctions.html">
+            
+                    
+                    Stateful Functions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.4" data-path="../tips/statefulFunctions.html">
+            
+                <a href="../tips/statefulFunctions.html">
+            
+                    
+                    Функции с состоянием
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.5" data-path="../tips/bind.html">
+            
+                <a href="../tips/bind.html">
+            
+                    
+                    Связывание это плохо
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.6" data-path="../tips/currying.html">
+            
+                <a href="../tips/currying.html">
+            
+                    
+                    Каррирование
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.7" data-path="../tips/typeInstantiation.html">
+            
+                <a href="../tips/typeInstantiation.html">
+            
+                    
+                    Конкретизация типа
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.8" data-path="../tips/lazyObjectLiteralInitialization.html">
+            
+                <a href="../tips/lazyObjectLiteralInitialization.html">
+            
+                    
+                    Ленивая инициализация объекта
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.9" data-path="../tips/classesAreUseful.html">
+            
+                <a href="../tips/classesAreUseful.html">
+            
+                    
+                    Полезные классы
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.10" data-path="../tips/defaultIsBad.html">
+            
+                <a href="../tips/defaultIsBad.html">
+            
+                    
+                    Избегайте использования Export Default
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.11" data-path="../tips/propertySetters.html">
+            
+                <a href="../tips/propertySetters.html">
+            
+                    
+                    Ограничьте использование сеттеров свойств
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.12" data-path="../tips/outFile.html">
+            
+                <a href="../tips/outFile.html">
+            
+                    
+                    outFile предостережение
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.13" data-path="../tips/jquery.html">
+            
+                <a href="../tips/jquery.html">
+            
+                    
+                    Советы по JQuery
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.14" data-path="../tips/staticConstructor.html">
+            
+                <a href="../tips/staticConstructor.html">
+            
+                    
+                    Статический конструктор
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.15" data-path="../tips/singleton.html">
+            
+                <a href="../tips/singleton.html">
+            
+                    
+                    Паттерн синглтон
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.16" data-path="../tips/functionParameters.html">
+            
+                <a href="../tips/functionParameters.html">
+            
+                    
+                    Аргументы функции
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.17" data-path="../tips/build-toggles.html">
+            
+                <a href="../tips/build-toggles.html">
+            
+                    
+                    Переключатели сборки
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.18" data-path="../tips/barrel.html">
+            
+                <a href="../tips/barrel.html">
+            
+                    
+                    Контейнер
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.19" data-path="../tips/create-arrays.html">
+            
+                <a href="../tips/create-arrays.html">
+            
+                    
+                    Создание массивов
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.20" data-path="../tips/typed-event.html">
+            
+                <a href="../tips/typed-event.html">
+            
+                    
+                    Типизированный генератор событий
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="../styleguide/styleguide.html">
+            
+                <a href="../styleguide/styleguide.html">
+            
+                    
+                    StyleGuide
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="../compiler/overview.html">
+            
+                <a href="../compiler/overview.html">
+            
+                    
+                    TypeScript Compiler Internals
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.17.1" data-path="../compiler/program.html">
+            
+                <a href="../compiler/program.html">
+            
+                    
+                    Program
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.2" data-path="../compiler/ast.html">
+            
+                <a href="../compiler/ast.html">
+            
+                    
+                    AST
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.17.2.1" data-path="../compiler/ast-tip-children.html">
+            
+                <a href="../compiler/ast-tip-children.html">
+            
+                    
+                    TIP: Visit Children
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.2.2" data-path="../compiler/ast-tip-syntaxkind.html">
+            
+                <a href="../compiler/ast-tip-syntaxkind.html">
+            
+                    
+                    TIP: SyntaxKind enum
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.2.3" data-path="../compiler/ast-trivia.html">
+            
+                <a href="../compiler/ast-trivia.html">
+            
+                    
+                    Trivia
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.3" data-path="../compiler/scanner.html">
+            
+                <a href="../compiler/scanner.html">
+            
+                    
+                    Scanner
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.4" data-path="../compiler/parser.html">
+            
+                <a href="../compiler/parser.html">
+            
+                    
+                    Parser
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.17.4.1" data-path="../compiler/parser-functions.html">
+            
+                <a href="../compiler/parser-functions.html">
+            
+                    
+                    Parser Functions
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.5" data-path="../compiler/binder.html">
+            
+                <a href="../compiler/binder.html">
+            
+                    
+                    Binder
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.17.5.1" data-path="../compiler/binder-functions.html">
+            
+                <a href="../compiler/binder-functions.html">
+            
+                    
+                    Binder Functions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.5.2" data-path="../compiler/binder-declarations.html">
+            
+                <a href="../compiler/binder-declarations.html">
+            
+                    
+                    Binder Declarations
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.5.3" data-path="../compiler/binder-container.html">
+            
+                <a href="../compiler/binder-container.html">
+            
+                    
+                    Binder Container
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.5.4" data-path="../compiler/binder-symboltable.html">
+            
+                <a href="../compiler/binder-symboltable.html">
+            
+                    
+                    Binder SymbolTable
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.5.5" data-path="../compiler/binder-diagnostics.html">
+            
+                <a href="../compiler/binder-diagnostics.html">
+            
+                    
+                    Binder Error Reporting
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.6" data-path="../compiler/checker.html">
+            
+                <a href="../compiler/checker.html">
+            
+                    
+                    Checker
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.17.6.1" data-path="../compiler/checker-global.html">
+            
+                <a href="../compiler/checker-global.html">
+            
+                    
+                    Checker Diagnostics
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.6.2" data-path="../compiler/checker-diagnostics.html">
+            
+                <a href="../compiler/checker-diagnostics.html">
+            
+                    
+                    Checker Error Reporting
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.7" data-path="../compiler/emitter.html">
+            
+                <a href="../compiler/emitter.html">
+            
+                    
+                    Emitter
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.17.7.1" data-path="../compiler/emitter-functions.html">
+            
+                <a href="../compiler/emitter-functions.html">
+            
+                    
+                    Emitter Functions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.7.2" data-path="../compiler/emitter-sourcemaps.html">
+            
+                <a href="../compiler/emitter-sourcemaps.html">
+            
+                    
+                    Emitter SourceMaps
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.8" data-path="../compiler/contributing.html">
+            
+                <a href="../compiler/contributing.html">
+            
+                    
+                    Помощь
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Опубликовано с помощью GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >Инструменты</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x438;&#x43D;&#x441;&#x442;&#x440;&#x443;&#x43C;&#x435;&#x43D;&#x442;&#x44B;">&#x418;&#x43D;&#x441;&#x442;&#x440;&#x443;&#x43C;&#x435;&#x43D;&#x442;&#x44B;</h1>
+<p>&#x412;&#x43E;&#x442; &#x43D;&#x435;&#x441;&#x43A;&#x43E;&#x43B;&#x44C;&#x43A;&#x43E; &#x43E;&#x442;&#x43B;&#x438;&#x447;&#x43D;&#x44B;&#x445; &#x438;&#x43D;&#x441;&#x442;&#x440;&#x443;&#x43C;&#x435;&#x43D;&#x442;&#x43E;&#x432;, &#x43A;&#x43E;&#x442;&#x43E;&#x440;&#x44B;&#x435; &#x44F; &#x440;&#x435;&#x43A;&#x43E;&#x43C;&#x435;&#x43D;&#x434;&#x443;&#x44E; &#x432;&#x430;&#x43C; &#x438;&#x441;&#x43F;&#x43E;&#x43B;&#x44C;&#x437;&#x43E;&#x432;&#x430;&#x442;&#x44C; &#x438;&#x43B;&#x438;, &#x43F;&#x43E; &#x43A;&#x440;&#x430;&#x439;&#x43D;&#x435;&#x439; &#x43C;&#x435;&#x440;&#x435;, &#x43F;&#x43E;&#x43F;&#x440;&#x43E;&#x431;&#x43E;&#x432;&#x430;&#x442;&#x44C; &#x432; &#x441;&#x432;&#x43E;&#x438;&#x445; &#x43F;&#x440;&#x43E;&#x435;&#x43A;&#x442;&#x430;&#x445; TypeScript.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../testing/cypress.html" class="navigation navigation-prev " aria-label="Previous page: Cypress">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="prettier.html" class="navigation navigation-next " aria-label="Next page: Prettier">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Инструменты","level":"1.14","depth":1,"next":{"title":"Prettier","level":"1.14.1","depth":2,"path":"docs/tools/prettier.md","ref":"docs/tools/prettier.md","articles":[]},"previous":{"title":"Cypress","level":"1.13.2","depth":2,"path":"docs/testing/cypress.md","ref":"docs/testing/cypress.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Basarat Ali Syed","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"TypeScript Deep Dive","language":"ru","gitbook":"*"},"file":{"path":"docs/tools/intro.md","mtime":"2020-10-12T20:52:14.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-02T19:45:49.639Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
